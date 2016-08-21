@@ -1,0 +1,1 @@
+timeout 600 gst-launch-1.0 -v v4l2src ! videorate ! image/jpeg,width=1280,height=720,framerate=30/3 ! avimux ! filesink location=`date "+%y%m%d%H%M%S"`.avi
