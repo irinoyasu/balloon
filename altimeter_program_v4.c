@@ -107,7 +107,7 @@ int main(void){
 			{
 				time(&section_time);
 				camera_flag++;
-				system(". video_record_10min.sh &");
+				system(". ./video_record_10min.sh &");
 			}
 			else
 			{
@@ -115,7 +115,7 @@ int main(void){
 				{
 					time(&section_time);
 					camera_flag++;
-					system(". video_record_10min.sh &");
+					system(". ./video_record_10min.sh &");
 				}
 			}
 		}
@@ -135,7 +135,7 @@ int main(void){
 					if(camera_flag < 86)
 					{
 						camera_flag++;
-						system(". snapshot.sh &");
+						system(". ./snapshot.sh &");
 					}
 					else
 					{
