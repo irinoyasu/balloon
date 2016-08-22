@@ -99,9 +99,9 @@ int main(void){
 			fprintf(fp,"%.2f,%.2f,%.2f\r\n",pressure,tempareture,altitude);
 			fclose(fp);
 		}
-		//10分ごとに動画新規ファイル作成,3時間後以降は1snapshot/1min，4時間後は全ての計測終了
+		//10分ごとに動画新規ファイル作成,4時間後以降は1snapshot/1min，5時間後は全ての計測終了
 		time(&now_time);
-		if(camera_flag < 18)
+		if(camera_flag < 24)
 		{
 			if(camera_flag == 0)
 			{
@@ -111,7 +111,7 @@ int main(void){
 			}
 			else
 			{
-				if((int)(now_time - section_time)>602)
+				if((int)(now_time - section_time)>605)
 				{
 					time(&section_time);
 					camera_flag++;
@@ -121,25 +121,29 @@ int main(void){
 		}
 		else
 		{
-			if(camera_flag == 18)
+			if(camera_flag == 24)
 			{
-				if((int)(now_time - section_time)>602)
+				if((int)(now_time - section_time)>605)
 				{
 					camera_flag++;
 				}
 			}
 			else
 			{
-				if(camera_flag < 80)
+				if((int)(now_time - section_time)>60)
 				{
-					camera_flag++;
-					system(". snapshot.sh &");
+					if(camera_flag < 86)
+					{
+						camera_flag++;
+						system(". snapshot.sh &");
+					}
+					else
+					{
+						//システムシャットダウン？
+						system("sudo shutdown -h now");
+					}
 				}
-				else
-				{
-					//システムシャットダウン？
-					//system("sudo shutdown -h now");
-				}
+				
 			}
 		}
 			
